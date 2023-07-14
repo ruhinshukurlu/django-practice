@@ -2,23 +2,29 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound
 
 
+monthly_tasks = {
+    "january":"Walk in the streen for an hour!",
+    "february":"Feb tasks",
+    "march":"March tasks",
+    "april":"april tasks",
+    "may":"may tasks",
+    "june":"june tasks",
+    "july":"july tasks",
+    "august":"august tasks",
+    "september":"september tasks",
+    "october":"october tasks",
+    "november":"november tasks",
+    "december":"december tasks",
+}
 
-# def task_one(request):
-#     return HttpResponse("Walk in the streen for an hour!")
-
-
-# def task_two(request):
-#     return HttpResponse("Do another thing!")
+def get_monthly_task_bynumber(request, month):
+    return HttpResponse(month)
 
 
 def get_monthly_task(request, month):
-    task_text = None
+    try:
+        task_text = monthly_tasks[month]
+        return HttpResponse(task_text)
+    except:
+        return HttpResponseNotFound("Not found such a month!")
 
-    if month == "january":
-        task_text = "Walk in the streen for an hour!"
-    elif month == "february":
-        task_text = "Do another thing!"
-    else:
-        return HttpResponseNotFound("This month isn't supported")
-
-    return HttpResponse(task_text)
