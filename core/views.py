@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.urls import reverse
 
 
 monthly_tasks = {
@@ -17,13 +18,16 @@ monthly_tasks = {
     "december":"december tasks",
 }
 
+
 def get_monthly_task_bynumber(request, month):
     months = list(monthly_tasks.keys())
     if month > len(months):
         return HttpResponseNotFound("Invalid month!")
 
-    redirect_month = months[month]
-    return HttpResponseRedirect("/tasks/" + redirect_month)
+    redirect_month = months[month-1]
+    redirect_path = reverse("monthly-task", args=[redirect_month])
+    print(redirect_path)
+    return HttpResponseRedirect(redirect_path)
 
 
 def get_monthly_task(request, month):
