@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseNotFound
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 
 
 monthly_tasks = {
@@ -18,7 +18,12 @@ monthly_tasks = {
 }
 
 def get_monthly_task_bynumber(request, month):
-    return HttpResponse(month)
+    months = list(monthly_tasks.keys())
+    if month > len(months):
+        return HttpResponseNotFound("Invalid month!")
+
+    redirect_month = months[month]
+    return HttpResponseRedirect("/tasks/" + redirect_month)
 
 
 def get_monthly_task(request, month):
