@@ -6,17 +6,17 @@ from django.template.loader import render_to_string
 
 monthly_tasks = {
     "january":"Walk in the streen for an hour!",
-    "february":"Feb tasks",
-    "march":"March tasks",
-    "april":"april tasks",
-    "may":"may tasks",
-    "june":"june tasks",
-    "july":"july tasks",
-    "august":"august tasks",
-    "september":"september tasks",
-    "october":"october tasks",
-    "november":"november tasks",
-    "december":"december tasks",
+    "february":"Feb tasks detail",
+    "march":"March tasks detail",
+    "april":"april tasks detail",
+    "may":"may tasks detail",
+    "june":"june tasks detail",
+    "july":"july tasks detail",
+    "august":"august tasks detail",
+    "september":"september tasks detail",
+    "october":"october tasks detail",
+    "november":"november tasks detail",
+    "december":"december tasks detail",
 }
 
 
@@ -47,8 +47,7 @@ def get_monthly_task_bynumber(request, month):
 def get_monthly_task(request, month):
     try:
         task_text = monthly_tasks[month]
-        response_data = render_to_string("tasks/task.html")
-        return HttpResponse(response_data)
+        return render(request, "tasks/task.html", { "task":task_text, "month":month })
     except:
         return HttpResponseNotFound("Not found such a month!")
 
