@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 from django.urls import reverse
+from django.template.loader import render_to_string
 
 
 monthly_tasks = {
@@ -46,7 +47,8 @@ def get_monthly_task_bynumber(request, month):
 def get_monthly_task(request, month):
     try:
         task_text = monthly_tasks[month]
-        return HttpResponse(task_text)
+        response_data = render_to_string("tasks/task.html")
+        return HttpResponse(response_data)
     except:
         return HttpResponseNotFound("Not found such a month!")
 
