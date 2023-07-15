@@ -22,15 +22,7 @@ monthly_tasks = {
 
 def index(request):
     months = list(monthly_tasks.keys())
-    list_items = ""
-
-    for month in months:
-        capitalized_month = month.capitalize()
-        path = reverse("monthly-task", args=[month])
-        list_items += f"<li><a href='{path}'>{capitalized_month}</a></li>"
-
-    response_data = f"<ul>{list_items}</ul>"
-    return HttpResponse(response_data)
+    return render(request, "tasks/index.html", {"months":months})
 
 
 def get_monthly_task_bynumber(request, month):
