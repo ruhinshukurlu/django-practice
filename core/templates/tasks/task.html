@@ -5,6 +5,8 @@
 {% endblock %}
 
 {% block content %}
+    {% include './includes/header.html' %}
+
     <h1>{{ month|title }} Task</h1>
 
     {% if task is not None %}
