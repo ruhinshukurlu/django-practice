@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.http import Http404, HttpResponseNotFound, HttpResponseRedirect
 from django.urls import reverse
 from django.template.loader import render_to_string
 
@@ -41,5 +41,5 @@ def get_monthly_task(request, month):
         task_text = monthly_tasks[month]
         return render(request, "tasks/task.html", { "task":task_text, "month":month })
     except:
-        return HttpResponseNotFound("Not found such a month!")
+        raise Http404()
 
