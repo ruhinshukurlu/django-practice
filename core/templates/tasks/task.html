@@ -8,6 +8,11 @@
 </head>
 <body>
     <h1>{{ month|title }} Task</h1>
-    <h2>{{task}}</h2>
+
+    {% if task is not None %}
+        <h2>{{task}}</h2>
+    {% else %}
+        <p>There isn't task for this month yet!</p>
+    {% endif %}
 </body>
 </html>

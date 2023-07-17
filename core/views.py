@@ -16,7 +16,7 @@ monthly_tasks = {
     "september":"september tasks detail",
     "october":"october tasks detail",
     "november":"november tasks detail",
-    "december":"december tasks detail",
+    "december": None # "december tasks detail",
 }
 
 
